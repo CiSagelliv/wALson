@@ -17,6 +17,10 @@ public:
     void analiza();
     int estado, columna;
     int relacionaCaracteres(char);
+    QString tokens(int);
+    QString errores(int);
+    char aCaracter;
+    QString acumulador;
 
 private slots:
     void on_btnAnaliza_clicked();
