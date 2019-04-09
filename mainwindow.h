@@ -14,6 +14,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void analiza();
+    int estado, columna;
+    int relacionaCaracteres(char);
 
 private slots:
     void on_btnAnaliza_clicked();
@@ -22,9 +25,11 @@ private slots:
 
     void on_action_Salir_triggered();
 
+
 private:
     Ui::MainWindow *ui;
     QString filename;
+    QString cadena;
 };
 
 #endif // MAINWINDOW_H
