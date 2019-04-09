@@ -1,0 +1,282 @@
+//Base complementada para analizador léxico
+
+//analiza, ¿qué debe analizar?
+void Analiza(){
+int estado, columna;
+char caracter;
+estado = 0;
+caracter = leerCaracter();
+   while (estado <= 9){
+	columna = Relaciona(caracter);
+	estado = Matriz[estado,columna];
+	caracter = leerCaracter();
+	}
+   if (estado >= 100 && estado <= 199){
+	token(estado);
+	} else {
+	error(estado);
+	}
+}
+
+//análisis de todos los caracteres que puede o no aceptar
+int Relaciona (char ca){
+	if(ca >= '0' && ca <= '9')
+      return 2;
+    switch(ca){
+      //aquí van todas las letras mayúsculas
+      case 'A': return 0;
+        
+      case 'B': return 0;
+        
+      case 'C': return 0;
+        
+      case 'D': return 0;
+        
+      case 'F': return 0;
+        
+      case 'G': return 0;
+        
+      case 'H': return 0;
+        
+      case 'I': return 0;
+        
+      case 'J': return 0;
+        
+      case 'K': return 0;
+        
+      case 'L': return 0;
+        
+      case 'M': return 0;
+        
+      case 'N': return 0;
+        
+      case 'O': return 0;
+        
+      case 'P': return 0;
+        
+      case 'Q': return 0;
+        
+      case 'R': return 0;
+        
+      case 'S': return 0;
+        
+      case 'T': return 0;
+        
+      case 'U': return 0;
+        
+      case 'V': return 0;
+        
+      case 'W': return 0;
+        
+      case 'X': return 0;
+        
+      case 'Y': return 0;
+        
+      case 'Z': return 0;
+        
+      //aquí van todas las letras minúsculas
+      case 'a': return 1;
+        
+      case 'b': return 1;
+        
+      case 'c': return 1;
+        
+      case 'd': return 1;
+        
+      case 'f': return 1;
+        
+      case 'g': return 1;
+        
+      case 'h': return 1;
+        
+      case 'i': return 1;
+        
+      case 'j': return 1;
+        
+      case 'k': return 1;
+        
+      case 'l': return 1;
+        
+      case 'm': return 1;
+        
+      case 'n': return 1;
+        
+      case 'o': return 1;
+        
+      case 'p': return 1;
+        
+      case 'q': return 1;
+        
+      case 'r': return 1;
+        
+      case 's': return 1;
+        
+      case 't': return 1;
+        
+      case 'u': return 1;
+        
+      case 'v': return 1;
+        
+      case 'w': return 1;
+        
+      case 'x': return 1;
+        
+      case 'y': return 1;
+        
+      case 'z': return 1;
+        
+      //signos de puntuación
+      case '.': return 4;
+        
+      case ';': return 23;
+        
+      case ':': return 22;
+        
+      //agrupación
+      case '(': return 24;
+         
+      case')': return 25;
+        
+      case '[': return 26;
+        
+      case']': return 27;
+        
+      //signos de operaciones
+      case '+': return 7;
+        
+      case'-': return 8;
+        
+      case '*': return 14;
+        
+      case'/': return 15; 
+        
+      case '%': return 28;
+        
+      //operadores relacionales
+      case'<': return 20;
+        
+      case '>': return 21;
+        
+      case'=': return 19;
+        
+      //operadores lógicos
+      case'&': return 16;
+        
+      case '|': return 17;
+        
+      case'!': return 18; 
+        
+      //guión bajo, comillas simples y dobles
+      case'_': return 3;
+        
+      case '\'': return 12;
+        
+      case'\"': return 13; 
+        
+      //para notación cientifica? aún está por verse
+      case 'E': return 5;
+        
+      case 'e': return 6;
+        
+      //tabulador, espacio en blanco y salto de línea, también está por verse
+      case'\n': return 13; 
+         
+      case'\t': return 13; 
+        
+      case' ': return 13; 
+        
+    }
+    return 29;
+}
+
+//esto muestra que es lo que encontro, el caracter se cacha al momento en que lo analiza
+void token(int t){
+	switch (t){
+	case 100: return "caracter : Palabra reservada";
+	  
+	case 101: return "caracter: Identificador";
+	  
+	case 102: return "caracter: Constante entera";
+	  
+	case 103: return "caracter: Constante real";
+	  
+	case 104: return "caracter: Constante con notación cientifica";
+	  
+	case 105: return "caracter: Constante caracter";
+	  
+	case 106: return "caracter: Constante string";
+	  
+	case 107: return "caracter: Suma";
+	  
+	case 108: return "caracter: Resta";
+	  
+	case 109: return "caracter: Multiplicación";
+	  
+	case 110: return "caracter: División";
+	  
+	case 111: return "caracter: Módulo";
+	  
+	case 112: return "caracter: Comentario";
+	  
+	case 113: return "caracter: AND";
+	  
+	case 114: return "caracter: OR";
+	  
+	case 115: return "caracter: NOT";
+	  
+	case 116: return "caracter: Diferente";
+	  
+	case 117: return "caracter: Igual";
+	  
+	case 118: return "caracter: Mayor";
+	  
+	case 119: return "caracter: Mayor o igual";
+	  
+	case 120: return "caracter: Menor";
+	  
+	case 121: return "caracter: Menor o igual";
+	  
+	case 122: return "caracter: Asignación";
+	  
+	case 123: return "caracter: Dos puntos";
+	  
+	case 124: return "caracter: Punto y coma";
+	  
+	case 125: return "caracter: Punto";
+	  
+	case 126: return "caracter: Paréntesis que abre";
+	  
+	case 127: return "caracter: Paréntesis que cierra";
+	  
+	case 128: return "caracter: Llave que abre";
+	  
+	case 129: return "caracter: Llave que cierra";
+	  
+	}
+}
+
+//errores que pueden surgir al momento de que se analizan los caracteres
+void error (int e){
+	switch (e){
+    case 500: return "Error 500: no es una constante numérica";
+      
+    case 501: return "Error 501: esperaba caracter después de _ ";
+      
+    case 502: return "Error 502: esperaba digito después de .";
+      
+    case 503: return "Error 503: esperaba digito +, - ";
+      
+    case 504: return "Error 504: esperaba digito después de signo +,- ";
+      
+    case 505: return "Error 505: esperaba digito diferente a comilla simple ";
+      
+    case 506: return "Error 506: esperaba comilla después de caracter ";
+      
+    case 507: return "Error 507: esperaba signo de & después de & ";
+      
+    case 508: return "Error 508: esperaba signo de | después de | ";
+      
+	}
+}
+
+//por el momento aquí termina
