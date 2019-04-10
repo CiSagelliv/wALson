@@ -89,13 +89,13 @@ void MainWindow::analiza(){
             estado = matriz[estado][columna];
             acumulador += QString(aCaracter);
         } else if (estado >= 100 && estado <= 199){
-            tokens(estado);
             ui->AreaTokens->appendPlainText(tokens(estado));
             estado=0;
+            acumulador = "";
         } else {
-            errores(estado);
             ui->AreaErrores->appendPlainText(errores(estado));
             estado=0;
+            acumulador = "";
         }
     }
 }
@@ -273,66 +273,65 @@ int MainWindow:: relacionaCaracteres(char c){
 QString MainWindow::tokens(int t){
     switch (t){
         case 100:
-        return "caracter : Palabra reservada";
+        return acumulador + ": Palabra reservada";
         case 101:
-        return "caracter: Identificador";
+        return acumulador + ":Identificador";
         case 102:
-        return "caracter: Constante entera";
+        return acumulador + ":Constante entera";
         case 103:
-        return "caracter: Constante real";
+        return acumulador + ":Constante real";
         case 104:
-        return "caracter: Constante con notación cientifica";
+        return acumulador + ":Constante con notación cientifica";
         case 105:
-        return "caracter: Constante caracter";
+        return acumulador + ":Constante caracter";
         case 106:
-        return "caracter: Constante string";
+        return acumulador + ":Constante string";
         case 107:
-        return "caracter: Suma";
+        return acumulador + ":Suma";
         case 108:
-        return "caracter: Resta";
+        return acumulador + ":Resta";
         case 109:
-        return "caracter: Multiplicación";
+        return acumulador + ":Multiplicación";
         case 110:
-        return "caracter: División";
+        return acumulador + ":División";
         case 111:
-        return "caracter: Módulo";
+        return acumulador + ":Módulo";
         case 112:
-        return "caracter: Comentario";
+        return acumulador + ":Comentario";
         case 113:
-        return "caracter: AND";
+        return acumulador + ":AND";
         case 114:
-        return "caracter: OR";
+        return acumulador + ":OR";
         case 115:
-        return "caracter: NOT";
+        return acumulador + ":NOT";
         case 116:
-        return "caracter: Diferente";
+        return acumulador + ":Diferente";
         case 117:
-        return "caracter: Igual";
+        return acumulador + ":Igual";
         case 118:
-        return "caracter: Mayor";
+        return acumulador + ":Mayor";
         case 119:
-        return "caracter: Mayor o igual";
+        return acumulador + ":Mayor o igual";
         case 120:
-        return "caracter: Menor";
+        return acumulador + ":Menor";
         case 121:
-        return "caracter: Menor o igual";
+        return acumulador + ":Menor o igual";
         case 122:
-        return "caracter: Asignación";
+        return acumulador + ":Asignación";
         case 123:
-        return "caracter: Dos puntos";
+        return acumulador + ":Dos puntos";
         case 124:
-        return "caracter: Punto y coma";
+        return acumulador + ":Punto y coma";
         case 125:
-        return "caracter: Punto";
+        return acumulador + ":Punto";
         case 126:
-        return "caracter: Paréntesis que abre";
+        return acumulador + ":Paréntesis que abre";
         case 127:
-        return "caracter: Paréntesis que cierra";
+        return acumulador + ":Paréntesis que cierra";
         case 128:
-        return "caracter: Llave que abre";
+        return acumulador + ":Llave que abre";
         case 129:
-        return "caracter: Llave que cierra";
-
+        return acumulador + ":Llave que cierra";
         }
 }
 
