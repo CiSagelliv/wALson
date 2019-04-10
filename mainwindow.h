@@ -21,6 +21,7 @@ public:
     QString errores(int);
     char aCaracter;
     QString acumulador;
+    bool seAgrega(void);
 
 private slots:
     void on_btnAnaliza_clicked();

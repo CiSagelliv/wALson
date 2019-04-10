@@ -83,19 +83,29 @@ void MainWindow::on_action_Salir_triggered()
 
 void MainWindow::analiza(){
     for(int i=0;i<cadena.length();i++){
-        if(estado < 100){
             aCaracter = cadena[i].toLatin1();
             columna = relacionaCaracteres(aCaracter);
             estado = matriz[estado][columna];
-            acumulador += QString(aCaracter);
-        } else if (estado >= 100 && estado <= 199){
+        if (estado >= 100 && estado <= 199){
+            if (seAgrega()){
+                acumulador += QString(aCaracter);
+            } else {
+                i--;
+            }
             ui->AreaTokens->appendPlainText(tokens(estado));
             estado=0;
             acumulador = "";
-        } else {
+        } else if (estado >= 500 && estado <= 550) {
+            if (seAgrega()){
+                acumulador += QString(aCaracter);
+            } else {
+                i--;
+            }
             ui->AreaErrores->appendPlainText(errores(estado));
             estado=0;
             acumulador = "";
+        } else if (estado > 0 && estado < 100) {
+            acumulador += QString(aCaracter);
         }
     }
 }
@@ -105,7 +115,7 @@ int MainWindow:: relacionaCaracteres(char c){
         return 2;
     }
     switch(c){
-    //aquí van todas las letras mayúsculas
+    //letras mayusculas
           case 'A': return 0;
 
           case 'B': return 0;
@@ -156,7 +166,7 @@ int MainWindow:: relacionaCaracteres(char c){
 
           case 'Z': return 0;
 
-          //aquí van todas las letras minúsculas
+          //letras minúsculas
           case 'a': return 1;
 
           case 'b': return 1;
@@ -261,9 +271,9 @@ int MainWindow:: relacionaCaracteres(char c){
           case 'e': return 6;
 
           //tabulador, espacio en blanco y salto de línea, también está por verse
-          case'\n': return 11;
+          case'\n': return 10;
 
-          case'\t': return 13;
+          case'\t': return 11;
 
           case' ': return 9;
         }
@@ -337,23 +347,90 @@ QString MainWindow::tokens(int t){
 
 QString MainWindow::errores(int e){
     switch (e){
-        case 500: return "Error 500: no es una constante numérica";
-
-        case 501: return "Error 501: esperaba caracter después de _ ";
-
-        case 502: return "Error 502: esperaba digito después de .";
-
-        case 503: return "Error 503: esperaba digito +, - ";
-
-        case 504: return "Error 504: esperaba digito después de signo +,- ";
-
-        case 505: return "Error 505: esperaba digito diferente a comilla simple ";
-
-        case 506: return "Error 506: esperaba comilla después de caracter ";
-
-        case 507: return "Error 507: esperaba signo de & después de & ";
-
-        case 508: return "Error 508: esperaba signo de | después de | ";
+        case 500:
+        return acumulador +  "Error 500: no es una constante numérica";
+        case 501:
+        return acumulador +  "Error 501: esperaba caracter después de _ ";
+        case 502:
+        return acumulador +  "Error 502: esperaba digito después de .";
+        case 503:
+        return acumulador +  "Error 503: esperaba digito +, - ";
+        case 504:
+        return acumulador +  "Error 504: esperaba digito después de signo +,- ";
+        case 505:
+        return acumulador +  "Error 505: esperaba digito diferente a comilla simple ";
+        case 506:
+        return acumulador +  "Error 506: esperaba comilla después de caracter ";
+        case 507:
+        return acumulador +  "Error 507: esperaba signo de & después de & ";
+        case 508:
+        return acumulador +  "Error 508: esperaba signo de | después de | ";
+        case 509:
+        return acumulador +  "Error 509: 404 not found ";
 
         }
+}
+
+bool MainWindow::seAgrega(){
+    switch (estado){
+        case 100:
+        case 101:
+        case 102:
+        case 103:
+        case 104:
+        case 110:
+        case 115:
+          return false;
+        /*case 105:
+        return acumulador + ":Constante caracter";
+        case 106:
+        return acumulador + ":Constante string";
+        case 107:
+        return acumulador + ":Suma";
+        case 108:
+        return acumulador + ":Resta";
+        case 109:
+        return acumulador + ":Multiplicación";
+        return acumulador + ":División";
+        case 111:
+        return acumulador + ":Módulo";
+        case 112:
+        return acumulador + ":Comentario";
+        case 113:
+        return acumulador + ":AND";
+        case 114:
+        return acumulador + ":OR";
+        return acumulador + ":NOT";
+        case 116:
+        return acumulador + ":Diferente";
+        case 117:
+        return acumulador + ":Igual";
+        case 118:
+        return acumulador + ":Mayor";
+        case 119:
+        return acumulador + ":Mayor o igual";
+        case 120:
+        return acumulador + ":Menor";
+        case 121:
+        return acumulador + ":Menor o igual";
+        case 122:
+        return acumulador + ":Asignación";
+        case 123:
+        return acumulador + ":Dos puntos";
+        case 124:
+        return acumulador + ":Punto y coma";
+        case 125:
+        return acumulador + ":Punto";
+        case 126:
+        return acumulador + ":Paréntesis que abre";
+        case 127:
+        return acumulador + ":Paréntesis que cierra";
+        case 128:
+        return acumulador + ":Llave que abre";
+        case 129:
+        return acumulador + ":Llave que cierra";
+        */
+        default:
+          return true;
+}
 }
