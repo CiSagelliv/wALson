@@ -283,7 +283,7 @@ int MainWindow:: relacionaCaracteres(char c){
 QString MainWindow::tokens(int t){
     switch (t){
         case 100:
-        return acumulador + ": Palabra reservada";
+        return acumulador + ":Palabra reservada";
         case 101:
         return acumulador + ":Identificador";
         case 102:
@@ -380,6 +380,7 @@ bool MainWindow::seAgrega(){
         case 104:
         case 110:
         case 115:
+        case 122:
           return false;
         /*case 105:
         return acumulador + ":Constante caracter";
@@ -391,7 +392,6 @@ bool MainWindow::seAgrega(){
         return acumulador + ":Resta";
         case 109:
         return acumulador + ":Multiplicación";
-        return acumulador + ":División";
         case 111:
         return acumulador + ":Módulo";
         case 112:
@@ -413,7 +413,6 @@ bool MainWindow::seAgrega(){
         return acumulador + ":Menor";
         case 121:
         return acumulador + ":Menor o igual";
-        case 122:
         return acumulador + ":Asignación";
         case 123:
         return acumulador + ":Dos puntos";
@@ -428,7 +427,27 @@ bool MainWindow::seAgrega(){
         case 128:
         return acumulador + ":Llave que abre";
         case 129:
-        return acumulador + ":Llave que cierra";
+        return acumulador + ":Llave que cierra"
+        case 500:
+        return acumulador +  "Error 500: no es una constante numérica";
+        case 501:
+        return acumulador +  "Error 501: esperaba caracter después de _ ";
+        case 502:
+        return acumulador +  "Error 502: esperaba digito después de .";
+        case 503:
+        return acumulador +  "Error 503: esperaba digito +, - ";
+        case 504:
+        return acumulador +  "Error 504: esperaba digito después de signo +,- ";
+        case 505:
+        return acumulador +  "Error 505: esperaba digito diferente a comilla simple ";
+        case 506:
+        return acumulador +  "Error 506: esperaba comilla después de caracter ";
+        case 507:
+        return acumulador +  "Error 507: esperaba signo de & después de & ";
+        case 508:
+        return acumulador +  "Error 508: esperaba signo de | después de | ";
+        case 509:
+        return acumulador +  "Error 509: 404 not found ";
         */
         default:
           return true;
