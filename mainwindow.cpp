@@ -3,6 +3,7 @@
 #include <QTextStream>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QList>
 
 static int matriz[22][30]= {
     {2,1,4,500,125,2,1,107,108,0,0,0,10,12,109,13,16,17,18,19,21,20,123,124,126,127,128,129,111,509},
@@ -38,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     estado = 0;
     columna = 0;
+    compara = 0;   
+    palabraR = {"class","begin","end","def","as" ,"integer","float", "char", "string", "boolean", "if", "else", "elseif","endif", "for", "do ", "endfor", "while", "endwhile", "function", "endfunction","import", "null", "read", "write", "enter", "principal"};
 }
 
 MainWindow::~MainWindow()
@@ -92,6 +95,7 @@ void MainWindow::analiza(){
             } else {
                 i--;
             }
+            verificarReservada(acumulador);
             ui->AreaTokens->appendPlainText(tokens(estado));
             estado=0;
             acumulador = "";
@@ -348,25 +352,25 @@ QString MainWindow::tokens(int t){
 QString MainWindow::errores(int e){
     switch (e){
         case 500:
-        return acumulador +  "Error 500: no es una constante numérica";
+        return acumulador + "" +  "Error 500: no es una constante numérica";
         case 501:
-        return acumulador +  "Error 501: esperaba caracter después de _ ";
+        return acumulador + "" +  "Error 501: esperaba caracter después de _ ";
         case 502:
-        return acumulador +  "Error 502: esperaba digito después de .";
+        return acumulador + "" +  "Error 502: esperaba digito después de .";
         case 503:
-        return acumulador +  "Error 503: esperaba digito +, - ";
+        return acumulador + "" +  "Error 503: esperaba digito +, - ";
         case 504:
-        return acumulador +  "Error 504: esperaba digito después de signo +,- ";
+        return acumulador + "" +  "Error 504: esperaba digito después de signo +,- ";
         case 505:
-        return acumulador +  "Error 505: esperaba digito diferente a comilla simple ";
+        return acumulador + "" +  "Error 505: esperaba digito diferente a comilla simple ";
         case 506:
-        return acumulador +  "Error 506: esperaba comilla después de caracter ";
+        return acumulador + "" +  "Error 506: esperaba comilla después de caracter ";
         case 507:
-        return acumulador +  "Error 507: esperaba signo de & después de & ";
+        return acumulador + "" +  "Error 507: esperaba signo de & después de & ";
         case 508:
-        return acumulador +  "Error 508: esperaba signo de | después de | ";
+        return acumulador + "" +  "Error 508: esperaba signo de | después de | ";
         case 509:
-        return acumulador +  "Error 509: 404 not found ";
+        return acumulador + "" +  "Error 509: 404 not found ";
 
         }
 }
@@ -404,19 +408,19 @@ bool MainWindow::seAgrega(){
       return true;
       //"caracter: Multiplicación";
     case 110: 
-      return true;
+      return false;
       //"caracter: División";
     case 111: 
-      return false;
+      return true;
       //"caracter: Módulo";
     case 112: 
-      return false;
+      return true;
       //"caracter: Comentario";
     case 113: 
-      return false;
+      return true;
       //"caracter: AND";
     case 114: 
-      return false;
+      return true;
       //"caracter: OR";
     case 115: 
       return false;
@@ -425,19 +429,19 @@ bool MainWindow::seAgrega(){
       return true;
       //"caracter: Diferente";
     case 117: 
-      return false;
+      return true;
       //"caracter: Igual";
     case 118: 
-      return false;
+      return true;
       //"caracter: Mayor";
     case 119: 
-      return false;
+      return true;
       //"caracter: Mayor o igual";
     case 120: 
-      return false;
+      return true;
       //"caracter: Menor";
     case 121: 
-      return false;
+      return true;
       //"caracter: Menor o igual";
     case 122: 
       return true;
@@ -465,7 +469,7 @@ bool MainWindow::seAgrega(){
       //"caracter: Llave que cierra";
   //aquí empiezan los errores 
     case 500:
-      return false; 
+      return true; 
       //"Error 500: no es una constante numérica";
     case 501:
       return false;  
@@ -474,7 +478,7 @@ bool MainWindow::seAgrega(){
       return false;   
       //"Error 502: esperaba digito después de .";
     case 503:
-      return false;   
+      return true;   
       //"Error 503: esperaba digito +, - ";
     case 504:
       return false;   
@@ -495,4 +499,21 @@ bool MainWindow::seAgrega(){
       return true;
       //"Error 509: 404 not found ";  
   }
+}
+
+
+
+
+
+bool MainWindow::verificarReservada(QString ac){
+    esReservada = false;
+    if (estado == 100){
+   for(int i=0; i<palabraR.length(); i++)
+   {
+    if (ac.contains(palabraR[i])){
+        esReservada = true;
+    }
+   }
+   return esReservada;
+}
 }

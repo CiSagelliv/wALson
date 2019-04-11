@@ -22,6 +22,12 @@ public:
     char aCaracter;
     QString acumulador;
     bool seAgrega(void);
+    QList<QString> palabraR;
+    bool verificarReservada(QString acumulador);
+    int compara;
+   bool esReservada;
+   QChar palR;
+
 
 private slots:
     void on_btnAnaliza_clicked();
