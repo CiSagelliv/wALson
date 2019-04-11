@@ -265,12 +265,12 @@ int MainWindow:: relacionaCaracteres(char c){
 
           case'\"': return 13;
 
-          //para notación cientifica? aún está por verse
+          //notación cientifica
           case 'E': return 5;
 
           case 'e': return 6;
 
-          //tabulador, espacio en blanco y salto de línea, también está por verse
+          //tabulador, espacio en blanco y salto de línea
           case'\n': return 10;
 
           case'\t': return 11;
@@ -373,83 +373,95 @@ QString MainWindow::errores(int e){
 
 bool MainWindow::seAgrega(){
     switch (estado){
-        case 100:
-        case 101:
-        case 102:
-        case 103:
-        case 104:
-        case 110:
-        case 115:
-        case 122:
-          return false;
-        /*case 105:
-        return acumulador + ":Constante caracter";
-        case 106:
-        return acumulador + ":Constante string";
-        case 107:
-        return acumulador + ":Suma";
-        case 108:
-        return acumulador + ":Resta";
-        case 109:
-        return acumulador + ":Multiplicación";
-        case 111:
-        return acumulador + ":Módulo";
-        case 112:
-        return acumulador + ":Comentario";
-        case 113:
-        return acumulador + ":AND";
-        case 114:
-        return acumulador + ":OR";
-        return acumulador + ":NOT";
-        case 116:
-        return acumulador + ":Diferente";
-        case 117:
-        return acumulador + ":Igual";
-        case 118:
-        return acumulador + ":Mayor";
-        case 119:
-        return acumulador + ":Mayor o igual";
-        case 120:
-        return acumulador + ":Menor";
-        case 121:
-        return acumulador + ":Menor o igual";
-        return acumulador + ":Asignación";
-        case 123:
-        return acumulador + ":Dos puntos";
-        case 124:
-        return acumulador + ":Punto y coma";
-        case 125:
-        return acumulador + ":Punto";
-        case 126:
-        return acumulador + ":Paréntesis que abre";
-        case 127:
-        return acumulador + ":Paréntesis que cierra";
-        case 128:
-        return acumulador + ":Llave que abre";
-        case 129:
-        return acumulador + ":Llave que cierra"
-        case 500:
-        return acumulador +  "Error 500: no es una constante numérica";
-        case 501:
-        return acumulador +  "Error 501: esperaba caracter después de _ ";
-        case 502:
-        return acumulador +  "Error 502: esperaba digito después de .";
-        case 503:
-        return acumulador +  "Error 503: esperaba digito +, - ";
-        case 504:
-        return acumulador +  "Error 504: esperaba digito después de signo +,- ";
-        case 505:
-        return acumulador +  "Error 505: esperaba digito diferente a comilla simple ";
-        case 506:
-        return acumulador +  "Error 506: esperaba comilla después de caracter ";
-        case 507:
-        return acumulador +  "Error 507: esperaba signo de & después de & ";
-        case 508:
-        return acumulador +  "Error 508: esperaba signo de | después de | ";
-        case 509:
-        return acumulador +  "Error 509: 404 not found ";
-        */
-        default:
-          return true;
-}
+    case 100: 
+      return false;
+      //"caracter : Palabra reservada";
+    case 101: 
+      return false;
+      //"caracter: Identificador";
+    case 102: 
+      return false;
+      //"caracter: Constante entera";
+    case 103: 
+      return false;
+      //"caracter: Constante real";
+    case 104: 
+      return false;
+      //"caracter: Constante con notación cientifica";
+    case 105: 
+      return true;
+      //"caracter: Constante caracter";
+    case 106: 
+      return true;
+      //"caracter: Constante string";
+    case 107: 
+      return true;
+      //"caracter: Suma";
+    case 108: 
+      return true;
+      //"caracter: Resta";
+    case 109: 
+      return true;
+      //"caracter: Multiplicación";
+    case 110: 
+      return true;
+      //"caracter: División";
+    case 111: 
+      return false;
+      //"caracter: Módulo";
+    case 112: 
+      return false;
+      //"caracter: Comentario";
+    case 113: 
+      return false;
+      //"caracter: AND";
+    case 114: 
+      return false;
+      //"caracter: OR";
+    case 115: 
+      return false;
+      //"caracter: NOT";
+    case 116: 
+      return true;
+      //"caracter: Diferente";
+    case 117: 
+      return false;
+      //"caracter: Igual";
+    case 118: 
+      return false;
+      //"caracter: Mayor";
+    case 119: 
+      return false;
+      //"caracter: Mayor o igual";
+    case 120: 
+      return false;
+      //"caracter: Menor";
+    case 121: 
+      return false;
+      //"caracter: Menor o igual";
+    case 122: 
+      return true;
+      //"caracter: Asignación";
+    case 123: 
+      return true;
+      //"caracter: Dos puntos";
+    case 124: 
+      return true;
+      //"caracter: Punto y coma";
+    case 125: 
+      return true;
+      //"caracter: Punto";
+    case 126: 
+      return true;
+      //"caracter: Paréntesis que abre";
+    case 127: 
+      return true;
+      //"caracter: Paréntesis que cierra";
+    case 128: 
+      return true;
+      //"caracter: Llave que abre";
+    case 129: 
+      return true;
+      //"caracter: Llave que cierra";
+  }
 }
