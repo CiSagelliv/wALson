@@ -463,6 +463,7 @@ bool MainWindow::seAgrega(){
     case 129: 
       return true;
       //"caracter: Llave que cierra";
+  //aquí empiezan los errores 
     case 500:
       return false; 
       //"Error 500: no es una constante numérica";
