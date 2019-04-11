@@ -40,7 +40,33 @@ MainWindow::MainWindow(QWidget *parent) :
     estado = 0;
     columna = 0;
     compara = 0;   
-    palabraR = {"class","begin","end","def","as" ,"integer","float", "char", "string", "boolean", "if", "else", "elseif","endif", "for", "do ", "endfor", "while", "endwhile", "function", "endfunction","import", "null", "read", "write", "enter", "principal"};
+    /*palabraR = {"class",
+    "begin",
+    "end",
+    "def",
+    "as" ,
+    "integer",
+    "float", 
+    "char", 
+    "string", 
+    "boolean", 
+    "if", 
+    "else", 
+    "elseif",
+    "endif", 
+    "for", 
+    "do ", 
+    "endfor", 
+    "while", 
+    "endwhile", 
+    "function", 
+    "endfunction",
+    "import", 
+    "null", 
+    "read", 
+    "write", 
+    "enter", 
+    "principal"};*/
 }
 
 MainWindow::~MainWindow()
@@ -88,7 +114,7 @@ void MainWindow::analiza(){
     for(int i=0;i<cadena.length();i++){
             aCaracter = cadena[i].toLatin1();
             columna = relacionaCaracteres(aCaracter);
-            estado = matriz[estado][columna];
+            estado = matriz[estado][columna];    
         if (estado >= 100 && estado <= 199){
             if (seAgrega()){
                 acumulador += QString(aCaracter);
@@ -99,6 +125,7 @@ void MainWindow::analiza(){
             ui->AreaTokens->appendPlainText(tokens(estado));
             estado=0;
             acumulador = "";
+
         } else if (estado >= 500 && estado <= 550) {
             if (seAgrega()){
                 acumulador += QString(aCaracter);
@@ -506,14 +533,17 @@ bool MainWindow::seAgrega(){
 
 
 bool MainWindow::verificarReservada(QString ac){
-    esReservada = false;
-    if (estado == 100){
-   for(int i=0; i<palabraR.length(); i++)
-   {
-    if (ac.contains(palabraR[i])){
-        esReservada = true;
-    }
-   }
-   return esReservada;
+        if (estado == 100){
+            if ((ac=="begin")||(ac=="end")||(ac=="def")||(ac=="as")
+              ||(ac=="integer")||(ac=="float")||(ac=="char")||(ac=="string")
+              ||(ac=="boolean")||(ac=="if")||(ac=="else")||(ac=="elseif")
+              ||(ac=="endif")||(ac=="for")||(ac=="do")||(ac=="endfor")
+              ||(ac=="while")||(ac=="endwhile")||(ac=="function")||(ac=="endfunction")
+              ||(ac=="import")||(ac=="null")||(ac=="read")||(ac=="write")
+              ||(ac=="enter")||(ac=="principal")){
+            estado=100;
+        }else {
+            estado=101;
+}
 }
 }
