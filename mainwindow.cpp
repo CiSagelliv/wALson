@@ -463,5 +463,35 @@ bool MainWindow::seAgrega(){
     case 129: 
       return true;
       //"caracter: Llave que cierra";
+    case 500:
+      return false; 
+      //"Error 500: no es una constante numérica";
+    case 501:
+      return false;  
+      //"Error 501: esperaba caracter después de _ ";
+    case 502:
+      return false;   
+      //"Error 502: esperaba digito después de .";
+    case 503:
+      return false;   
+      //"Error 503: esperaba digito +, - ";
+    case 504:
+      return false;   
+      //"Error 504: esperaba digito después de signo +,- ";
+    case 505:
+      return false;   
+      //"Error 505: esperaba digito diferente a comilla simple ";
+    case 506:
+      return false;   
+      //"Error 506: esperaba comilla después de caracter ";
+    case 507:
+      return false; 
+      //"Error 507: esperaba signo de & después de & ";
+    case 508:
+      return false;  
+      //"Error 508: esperaba signo de | después de | ";
+    case 509:
+      return true;
+      //"Error 509: 404 not found ";  
   }
 }
